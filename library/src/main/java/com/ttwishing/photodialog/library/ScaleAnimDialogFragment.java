@@ -68,15 +68,15 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
         @Override
         public Rect evaluate(float fraction, Rect startValue, Rect endValue) {
             return new Rect(
-                    wheatbiscuit(startValue.left, endValue.left, fraction),
-                    wheatbiscuit(startValue.top, endValue.top, fraction),
-                    wheatbiscuit(startValue.right, endValue.right, fraction),
-                    wheatbiscuit(startValue.bottom, endValue.bottom, fraction)
+                    getValue(startValue.left, endValue.left, fraction),
+                    getValue(startValue.top, endValue.top, fraction),
+                    getValue(startValue.right, endValue.right, fraction),
+                    getValue(startValue.bottom, endValue.bottom, fraction)
             );
         }
 
-        public int wheatbiscuit(int paramInt1, int paramInt2, float paramFloat) {
-            return (int) (paramInt1 + paramFloat * (paramInt2 - paramInt1));
+        public int getValue(int startValue, int endValue, float fraction) {
+            return (int) (startValue + fraction * (endValue - startValue));
         }
     };
 
@@ -141,7 +141,7 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
     }
 
     public void setBitmap(BitmapDrawable bitmapDrawable) {
-        if(bitmapDrawable != null && bitmapDrawable.getBitmap() != null){
+        if (bitmapDrawable != null && bitmapDrawable.getBitmap() != null) {
             this.bitmap = bitmapDrawable.getBitmap();
             this.bitmapRatio = (float) bitmap.getWidth() / bitmap.getHeight();
             this.bitmapDrawable = bitmapDrawable;
@@ -211,6 +211,7 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
                     this.oriBitmapBounds, this.dstBitmapBounds
             };
 
+            //更新变化
             ObjectAnimator boundsAnimator = ObjectAnimator.ofObject(this.bitmapDrawable, "bounds", this.boundsEvaluator, values);
             boundsAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
@@ -329,6 +330,7 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
 
     /**
      * view在原布局结构显示的位置
+     *
      * @param view
      * @return
      */
@@ -374,12 +376,13 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
     /**
      * 后续回退操作
      */
-    protected void handleBack(){
+    protected void handleBack() {
 
     }
 
     /**
      * view未回收
+     *
      * @return
      */
     protected boolean isActivated() {
