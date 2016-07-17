@@ -30,6 +30,9 @@ public class PhotoDialogFragment extends ScaleAnimDialogFragment {
     protected AnimatorListenerAdapter hideAnimatorListener;
     protected AnimatorListenerAdapter showAnimatorListener;
 
+    /**
+     * overlay的显示与隐藏
+     */
     protected final Runnable overlayVisibilityRunnable = new Runnable() {
         @Override
         public void run() {
@@ -42,7 +45,6 @@ public class PhotoDialogFragment extends ScaleAnimDialogFragment {
         dialogFragment.setBitmap(bitmapDrawable);
         dialogFragment.setActivityAndView(activity, view);
     }
-
 
     @Override
     public void onResume() {
@@ -120,7 +122,10 @@ public class PhotoDialogFragment extends ScaleAnimDialogFragment {
         }, OVERLAY_SHOW_DELAY);
     }
 
-
+    /**
+     * 隐藏/显示 导航栏 title栏 bottom栏
+     * @param visibility
+     */
     private void setOverlayVisibility(boolean visibility) {
         if (this.showOverlay == visibility) {
             return;
