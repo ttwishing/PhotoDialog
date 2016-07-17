@@ -194,7 +194,7 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
         if (backgroundDrawable != null) {
             getView().setBackgroundDrawable(backgroundDrawable);
         }
-        getView().setLayerType(2, null);
+        getView().setLayerType(View.LAYER_TYPE_HARDWARE, null);
         if (this.animConfigured) {
             getView().setAlpha(0.0F);
 
@@ -230,7 +230,7 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
                     isAnimating = false;
                     animatingView.setVisibility(View.VISIBLE);
                     containerLayout.invalidate();
-                    getView().setLayerType(0, null);
+                    getView().setLayerType(View.LAYER_TYPE_NONE, null);
                     enterAnimFinish();
                 }
             });
@@ -248,7 +248,7 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
                         return;
                     }
 
-                    getView().setLayerType(0, null);
+                    getView().setLayerType(View.LAYER_TYPE_NONE, null);
                     enterAnimFinish();
                 }
             });
@@ -262,7 +262,7 @@ public abstract class ScaleAnimDialogFragment extends BaseDialogFragment {
      * 退出动画
      */
     private void animOut() {
-        getView().setLayerType(2, null);
+        getView().setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         if (this.animConfigured && isActivated()) {
             this.isAnimating = true;
